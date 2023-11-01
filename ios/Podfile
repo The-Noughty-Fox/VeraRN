@@ -5,8 +5,11 @@ require Pod::Executable.execute_command('node', ['-p',
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
-platform :ios, min_ios_version_supported
+platform :ios, '13.5'
+use_frameworks! :linkage => :static
 prepare_react_native_project!
+
+plugin 'cocoapods-pod-linkage'
 
 # If you are using a `react-native-flipper` your iOS build will fail when `NO_FLIPPER=1` is set.
 # because `react-native-flipper` depends on (FlipperKit,...) that will be excluded
@@ -28,6 +31,9 @@ end
 target 'VeraRN' do
   config = use_native_modules!
 
+  pod 'VeraSDK', :path => '../../vera-ios-sdk'
+  pod 'libwebp', :linkage => :dynamic
+
   # Flags change depending on the env values.
   flags = get_default_flags()
 
@@ -40,7 +46,7 @@ target 'VeraRN' do
     #
     # Note that if you have use_frameworks! enabled, Flipper will not work and
     # you should disable the next line.
-    :flipper_configuration => flipper_config,
+    # :flipper_configuration => flipper_config,
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
