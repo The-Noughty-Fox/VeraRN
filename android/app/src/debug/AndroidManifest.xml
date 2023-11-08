@@ -6,8 +6,11 @@
 
     <application
         android:usesCleartextTraffic="true"
+        android:name=".MainApplication"
+        android:icon="@mipmap/ic_launcher"
         tools:targetApi="28"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:icon,android:name">
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false" />
     </application>
 </manifest>
